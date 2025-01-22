@@ -83,7 +83,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
      * 3. The contract has ETH (has players).
      * 4. Implicitly, your subscription has LINK.
      */
-    function checkUpKeeper(bytes memory /* checkData */ )
+    function checkUpKeep(bytes memory /* checkData */ )
         public
         view
         returns (bool upkeepNeeded, bytes memory /* performData */ )
@@ -97,7 +97,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     }
 
     function performUpkeep(bytes calldata /* performData */ ) external {
-        (bool upkeepNeeded,) = checkUpKeeper("");
+        (bool upkeepNeeded,) = checkUpKeep("");
         if (!upkeepNeeded) {
             revert Raffle__UpkeepNotNeeded(address(this).balance, s_players.length, uint256(s_raffleState));
         }
